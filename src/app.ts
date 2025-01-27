@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import authRouter from "./routes/auth";
+import productRouter from "./routes/product"
 import connectDB from "./config/config";
 import logger from "./utils/logger";
 
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/auth", authRouter);
+app.use("/product", productRouter);
 
 connectDB();
 
