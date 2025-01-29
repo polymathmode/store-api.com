@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { User } from '../models/user';
 import { ApiError } from '../utils/apiError';
 
-interface UserInput {
+export interface UserInput {
   email: string;
   password: string;
   role?: string;
