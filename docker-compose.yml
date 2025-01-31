@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: store-api
+    ports:
+      - "4700:4700"
+    environment:
+      - NODE_ENV=development
+      - MONGODB_URI=mongodb://mongodb:27017/store_api
+      - JWT_SECRET=${JWT_SECRET}
+      - PORT=${PORT}
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - store-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:4700/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  mongodb:
+    image: mongo:latest
+    container_name: store-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - store-network
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_DATABASE=store_api
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  mongodb_data:
+    name: store-mongodb-data
+
+networks:
+  store-network:
+    name: store-network
+    driver: bridge

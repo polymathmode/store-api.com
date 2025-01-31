@@ -5,7 +5,7 @@ yarn-error.log
 .git
 .gitignore
 .env
-.env.*
+.env*
 dist
 coverage
 .DS_Store

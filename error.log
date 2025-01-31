@@ -1,1 +1,2 @@
 [2025-01-26T19:22:48.217Z] ERROR: Expected double-quoted property name in JSON at position 130
+[2025-01-31T08:59:41.607Z] ERROR: Failed to connect to database: querySrv ESERVFAIL _mongodb._tcp.cluster0.ydebr.mongodb.net

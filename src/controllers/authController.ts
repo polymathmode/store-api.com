@@ -1,4 +1,3 @@
-
 import { Request, Response, RequestHandler } from 'express';
 import { createUser, authenticateUser } from '../services/authService';
 import { ApiError } from '../utils/apiError';
